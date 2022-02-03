@@ -12,12 +12,12 @@ The goal of this challenge is to improve the quality of the code and ensure that
 - Utilize TypeScript better
 - Slightly improve the UI
 - Extract some functions or components if needed
+- Add extra functionality if you're feeling up to it -- can use mock data, interact with the blockchain, or just make a cool design -- anything you'd like. 
 
 ### What not to do?
 
 Do not:
 
-- Add any new functionalities
 - Rebuild completely the design
 - Modify the data returned by API
 - Remove Next.js or replace it with different React framework
