@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "npx tsc",
     "test": "echo \"Writing some tests is definitely a good idea!\" && exit 0"
   },
   "dependencies": {
