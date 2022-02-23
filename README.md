@@ -62,7 +62,7 @@ Now it's time to add a new feature to the existing app.
 
 Please implement the user story below:
 
-> - As a user, I want to see four cheapest NFTs from the collection I want to sweep floor for.
+> - As a user, I want to see four cheapest NFTs from a collection.
 > - For each NFT I want to see its name, image and current price in ETH
 
 ### Details
