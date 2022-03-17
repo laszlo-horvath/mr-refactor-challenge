@@ -10,5 +10,8 @@ module.exports = {
       tsconfig: './tsconfig.json'
     },
   },
-  setupFilesAfterEnv: ['./enzyme.config.js']
+  setupFilesAfterEnv: ['./enzyme.config.js'],
+  moduleNameMapper: {
+    '^types/(.*)$': '<rootDir>/types/$1'
+  }
 }
