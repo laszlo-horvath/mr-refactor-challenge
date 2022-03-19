@@ -1,74 +1,55 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
-import ProjectSelect from '../components/ProjectSelectContainer';
-import styles from '../page.module.css';
+import { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
 
-const Home = () => {
-  const [quantity, setQuantity] = useState(1);
-  const [project, setProject] = useState();
-  const [result, setResult] = useState();
+import Home from './Home';
+import Project from 'types/Project';
 
-  const onSubmit = event => {
+const DEFAULT_QUANTITY = 1;
+
+const HomeContainer = () => {
+  const [quantity, setQuantity] = useState(DEFAULT_QUANTITY);
+  const [project, setProject] = useState<Project>();
+  const [result, setResult] = useState<number>();
+
+  const onFormSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setResult(project.floorPrice * quantity);
+
+    if (project) {
+      setResult(project.floorPrice * quantity);
+    }
+  };
+
+  const onProjectSelectChange = (project: Project) => {
+    setProject(project);
+    setResult(undefined);
+  };
+
+  const onQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseInt(event.target.value);
+    setQuantity(parsed);
+    setResult(undefined);
+  };
+
+  const onResetClick = (event: MouseEvent) => {
+    event.preventDefault();
+
+    setQuantity(DEFAULT_QUANTITY);
+    setProject(undefined);
+    setResult(undefined);
   };
 
   return (
-    <div className={styles.container}>
-      <div className="text-3xl font-semibold">NFT Floor Sweep Estimator</div>
-      <div className="pt-8 pb-4 font-medium">What NFT project do you want to buy?</div>
-      <form className="space-y-4" onSubmit={onSubmit}>
-        <div>
-          Choose project:
-          <ProjectSelect
-            onChange={project => {
-              setProject(project);
-              setResult(undefined);
-            }}
-          />
-        </div>
-        <div>
-          <div>How many items you want to buy?</div>
-          <input
-            type="text"
-            value={quantity}
-            onChange={e => {
-              setQuantity(e.target.value);
-              setResult(undefined);
-            }}
-            className="border border-gray-200 px-3 py-2"
-            width="400"
-          />
-        </div>
-        <button className="border border-green-300 pl-2 pr-2 py-1 rounded font-medium">
-          Submit
-        </button>
-        <button
-          className="border border-red-300 pl-2 pr-2 py-1 rounded font-medium ml-4"
-          onClick={e => {
-            console.log('Clicked');
-            e.preventDefault();
-            setQuantity(1);
-            setProject(undefined);
-            setResult(undefined);
-          }}
-        >
-          Reset
-        </button>
-
-        {result && (
-          <div className="pt-16">
-            <h3 className="font-semibold mb-2 text-2xl">Calculation result</h3>
-            <div>
-              To buy {quantity} NFTs from the <b>{project.name}</b> collection you will need at
-              least {result} ETH.
-            </div>
-          </div>
-        )}
-      </form>
-    </div>
+    <Home
+      quantity={quantity}
+      project={project}
+      result={result}
+      onFormSubmit={onFormSubmit}
+      onProjectSelectChange={onProjectSelectChange}
+      onQuantityChange={onQuantityChange}
+      onResetClick={onResetClick}
+    />
   );
 };
 
-export default Home;
+export default HomeContainer;
