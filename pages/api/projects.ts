@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import Project from 'types/Project';
 
-type Data = any;
-
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<Project[]>) {
   console.log('API start');
 
   res.status(200).json([
