@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import ProjectSelect from '../components/ProjectSelect';
+import ProjectSelect from '../components/ProjectSelectContainer';
 import styles from '../page.module.css';
 
 const Home = () => {
