@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import { act } from '@testing-library/react';
 
 import Project from 'types/Project';
@@ -23,13 +23,13 @@ describe('Home Container', () => {
   });
 
   it('should set project & quantity then calculate the result and reset', async () => {
-    let rendered: any;
+    let rendered: unknown;
     await act(() => {
       rendered = shallow(<HomeContainer />);
 
       return Promise.resolve();
     });
-    const Home = rendered.find('Home');
+    const Home = (rendered as ShallowWrapper).find('Home');
 
     const onProjectSelectChange: (project: Project) => void = Home.prop('onProjectSelectChange');
     const mockProject: Project = {
@@ -39,32 +39,33 @@ describe('Home Container', () => {
     };
     onProjectSelectChange(mockProject);
 
-    const HomeUpdatedWithProject = rendered.find('Home');
+    const HomeUpdatedWithProject = (rendered as ShallowWrapper).find('Home');
     expect(HomeUpdatedWithProject.prop('project')).toEqual(mockProject);
     expect(HomeUpdatedWithProject.prop('result')).toEqual(undefined);
 
-    const onQuantityChange: any = HomeUpdatedWithProject.prop('onQuantityChange');
+    type EventHandler = (event: Object) => void;
+    const onQuantityChange: EventHandler = HomeUpdatedWithProject.prop('onQuantityChange');
     const mockChangeEvent = { target: { value: 12.25 } };
     onQuantityChange(mockChangeEvent);
 
-    const HomeUpdatedWithQuantity = rendered.find('Home');
+    const HomeUpdatedWithQuantity = (rendered as ShallowWrapper).find('Home');
     expect(HomeUpdatedWithQuantity.prop('quantity')).toEqual(12);
     expect(HomeUpdatedWithQuantity.prop('result')).toEqual(undefined);
 
-    const onFormSubmit: any = HomeUpdatedWithQuantity.prop('onFormSubmit');
+    const onFormSubmit: EventHandler = HomeUpdatedWithQuantity.prop('onFormSubmit');
     const eventMock = { preventDefault: jest.fn() };
     onFormSubmit(eventMock);
     expect(eventMock.preventDefault).toHaveBeenCalledTimes(1);
 
-    const HomeUpdatedWithResult = rendered.find('Home');
+    const HomeUpdatedWithResult = (rendered as ShallowWrapper).find('Home');
     expect(HomeUpdatedWithResult.prop('result')).toEqual(15.25 * 12);
 
-    const onResetClick: any = HomeUpdatedWithResult.prop('onResetClick');
+    const onResetClick: EventHandler = HomeUpdatedWithResult.prop('onResetClick');
     const mockMouseEvent = { preventDefault: jest.fn() };
     onResetClick(mockMouseEvent);
     expect(mockMouseEvent.preventDefault).toHaveBeenCalledTimes(1);
 
-    const HomeReset = rendered.find('Home');
+    const HomeReset = (rendered as ShallowWrapper).find('Home');
     expect(HomeReset.prop('quantity')).toEqual(1);
     expect(HomeReset.prop('project')).toEqual(undefined);
     expect(HomeReset.prop('result')).toEqual(undefined);
