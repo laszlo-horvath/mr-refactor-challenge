@@ -4,13 +4,14 @@ import ProjectSelect from './ProjectSelect';
 import Project from 'types/Project';
 
 interface ProjectsProps {
+  project: Project | undefined;
+  isValid: boolean;
   onChange: (project: Project) => void;
 }
 
 export default function Projects(props: ProjectsProps) {
-  const { onChange } = props;
+  const { project, onChange } = props;
 
-  const [project, setProject] = useState<Project>();
   const [projects, setProjects] = useState(new Array());
   const [isLoading, setLoading] = useState(true);
 
@@ -28,17 +29,13 @@ export default function Projects(props: ProjectsProps) {
     fetchProjects();
   }, []);
 
-  const onListboxChange = (project: Project) => {
-    setProject(project);
-    onChange(project);
-  };
-
   return (
     <ProjectSelect
       isLoading={isLoading}
+      isValid={props.isValid}
       project={project}
       projects={projects}
-      onListboxChange={onListboxChange}
+      onListboxChange={onChange}
     />
   );
 }

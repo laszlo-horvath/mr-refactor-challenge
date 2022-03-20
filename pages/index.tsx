@@ -1,5 +1,3 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
 import { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
 
 import Home from './Home';
@@ -11,12 +9,25 @@ const HomeContainer = () => {
   const [quantity, setQuantity] = useState(DEFAULT_QUANTITY);
   const [project, setProject] = useState<Project>();
   const [result, setResult] = useState<number>();
+  const [errors, setFormErrors] = useState({ quantity: false, project: false });
+
+  if (isNaN(quantity)) {
+    // @ts-ignore
+    setQuantity('');
+  }
 
   const onFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if (project) {
-      setResult(project.floorPrice * quantity);
+    setFormErrors({
+      ...errors,
+      quantity: !quantity,
+      project: !project
+    });
+
+    if (project && quantity) {
+      const parsedResult = Math.floor(project.floorPrice * quantity);
+      setResult(parsedResult);
     }
   };
 
@@ -44,6 +55,7 @@ const HomeContainer = () => {
       quantity={quantity}
       project={project}
       result={result}
+      errors={errors}
       onFormSubmit={onFormSubmit}
       onProjectSelectChange={onProjectSelectChange}
       onQuantityChange={onQuantityChange}

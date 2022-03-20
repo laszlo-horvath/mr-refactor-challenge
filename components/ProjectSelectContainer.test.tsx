@@ -21,16 +21,19 @@ describe('Project Select Container', () => {
   });
 
   const props = {
-    onChange: jest.fn()
+    project: mockProjects[0],
+    isValid: false,
+    onChange: () => {}
   };
 
   it('should pass defaults as props', () => {
     const rendered = shallow(<ProjectsContainer {...props} />);
     const ProjectSelect = rendered.find('ProjectSelect');
 
-    expect(ProjectSelect.prop('project')).toEqual(undefined);
+    expect(ProjectSelect.prop('project')).toEqual(mockProjects[0]);
     expect(ProjectSelect.prop('projects')).toEqual([]);
     expect(ProjectSelect.prop('isLoading')).toEqual(true);
+    expect(ProjectSelect.prop('isValid')).toEqual(false);
     expect(ProjectSelect.prop('onListboxChange')).toBeInstanceOf(Function);
   });
 
@@ -50,24 +53,24 @@ describe('Project Select Container', () => {
     expect(ProjectSelect.prop('isLoading')).toEqual(false);
   });
 
-  it('should call the proper functions through onListboxChange', async () => {
+  it('should call the proper functions through onChange', async () => {
+    const localProps = {
+      ...props,
+      onChange: jest.fn()
+    };
+
     let rendered: unknown;
     await act(() => {
-      rendered = shallow(<ProjectsContainer {...props} />);
+      rendered = shallow(<ProjectsContainer {...localProps} />);
 
       return Promise.resolve();
     });
 
     const ProjectSelect = (rendered as ShallowWrapper).find('ProjectSelect');
 
-    const onListboxChange: (project: Project) => void = ProjectSelect.prop('onListboxChange');
-    onListboxChange(mockProjects[1]);
+    const onChange: (project: Project) => void = ProjectSelect.prop('onListboxChange');
+    onChange(mockProjects[1]);
 
-    const ProjectSelectUpdated = (rendered as ShallowWrapper).find('ProjectSelect');
-
-    const project: Project = ProjectSelectUpdated.prop('project');
-    expect(project.name).toEqual(mockProjects[1].name);
-    expect(project.logo).toEqual(mockProjects[1].logo);
-    expect(project.floorPrice).toEqual(mockProjects[1].floorPrice);
+    expect(localProps.onChange).toHaveBeenCalledTimes(1);
   });
 });
