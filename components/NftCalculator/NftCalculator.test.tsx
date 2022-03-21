@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import Home from './Home';
+import NftCalculator from './NftCalculator';
 import Project from 'types/Project';
 
-describe('Home', () => {
+describe('Nft Calculator', () => {
   const mockProject: Project = {
     name: 'My Project',
     logo: 'logo1.png',
@@ -26,7 +26,7 @@ describe('Home', () => {
   };
 
   it('should render properly based on props', () => {
-    let rendered = shallow(<Home {...props} />);
+    let rendered = shallow(<NftCalculator {...props} />);
 
     let inputField = rendered.find('[data-automation-id="field-quantity"]');
     expect(inputField.prop('value')).toBe(3);
@@ -40,7 +40,7 @@ describe('Home', () => {
   });
 
   it('should call the event handlers properly', () => {
-    let rendered = shallow(<Home {...props} />);
+    let rendered = shallow(<NftCalculator {...props} />);
 
     const projectSelect = rendered.find('Projects');
     projectSelect.simulate('change', mockProject);
@@ -68,15 +68,15 @@ describe('Home', () => {
         quantity: true
       }
     };
-    let rendered = shallow(<Home {...localProps} />);
+    let rendered = shallow(<NftCalculator {...localProps} />);
 
     let projects = rendered.find('Projects');
     expect(projects.prop('isValid')).toBe(false);
 
-    let projectErrorMessage = rendered.find('Projects + [data-automation-id="form-error-message"]');
-    expect(projectErrorMessage.text()).toContain('field is required');
+    let projectErrorMessage = rendered.find('Projects + FormError');
+    expect(projectErrorMessage).toBeDefined();
 
-    let quantityErrorMessage = rendered.find('[data-automation-id="field-quantity"] + [data-automation-id="form-error-message"]');
-    expect(quantityErrorMessage.text()).toContain('field is required');
+    let quantityErrorMessage = rendered.find('[data-automation-id="field-quantity"] + FormError');
+    expect(quantityErrorMessage).toBeDefined();
   });
 });

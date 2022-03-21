@@ -2,7 +2,8 @@ import { FormEvent, ChangeEvent, MouseEvent } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import ProjectSelect from '../components/ProjectSelect/ProjectSelectContainer';
+import ProjectSelect from './../ProjectSelect/ProjectSelectContainer';
+import { FormError } from './../Form/FormError';
 import Project from 'types/Project';
 
 interface HomeProps {
@@ -19,13 +20,7 @@ interface HomeProps {
   onResetClick: (event: MouseEvent) => void;
 }
 
-const FormError = (
-  <p data-automation-id="form-error-message" className="text-red-500">
-    This field is required.
-  </p>
-);
-
-const Home = (props: HomeProps) => {
+const NftCalculator = (props: HomeProps) => {
   const {
     quantity,
     project,
@@ -44,7 +39,7 @@ const Home = (props: HomeProps) => {
     >
       <section data-automation-id="section-form">
         <header>
-          <h1 className="text-3xl mb-2 font-semibold">NFT Floor Sweep Estimator</h1>
+          <h1 className="text-2xl mb-2 font-semibold">NFT Floor Sweep Estimator</h1>
           <h2 className="mt-4 mb-6 font-medium">What NFT project do you want to buy?</h2>
         </header>
         <form data-automation-id="form-nft-projects" className="space-y-4" onSubmit={onFormSubmit}>
@@ -58,7 +53,7 @@ const Home = (props: HomeProps) => {
                 isValid={!errors.project}
                 onChange={onProjectSelectChange}
               />
-              {errors.project && FormError}
+              {errors.project && <FormError />}
             </div>
             <div data-automation-id="fieldset-quantity" className="mb-4">
               <label htmlFor="quantity" className="block mb-2">
@@ -85,7 +80,7 @@ const Home = (props: HomeProps) => {
                   { 'border-red-300': errors.quantity }
                 )}
               />
-              {errors.quantity && FormError}
+              {errors.quantity && <FormError />}
             </div>
           </section>
           <footer data-automation-id="footer">
@@ -126,4 +121,4 @@ const Home = (props: HomeProps) => {
   );
 };
 
-export default Home;
+export default NftCalculator;

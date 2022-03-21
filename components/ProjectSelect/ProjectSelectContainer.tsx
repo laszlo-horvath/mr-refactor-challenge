@@ -18,8 +18,8 @@ export default function Projects(props: ProjectsProps) {
   const fetchProjects = () => {
     fetch('/api/projects')
       .then(response => response.json())
-      .then(data => {
-        setProjects(data);
+      .then(projects => {
+        setProjects(projects);
         setLoading(false);
       })
       .catch(e => console.log(e));
