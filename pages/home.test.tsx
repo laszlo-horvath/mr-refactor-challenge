@@ -4,9 +4,6 @@ import { shallow } from 'enzyme';
 import Home from './Home';
 import Project from 'types/Project';
 
-// ignore the CSS file in unit tests
-jest.mock('../page.module.css', () => ({}));
-
 describe('Home', () => {
   const mockProject: Project = {
     name: 'My Project',

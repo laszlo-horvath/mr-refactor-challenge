@@ -5,9 +5,6 @@ import { act } from '@testing-library/react';
 import Project from 'types/Project';
 import HomeContainer from './index';
 
-// ignore the CSS file in unit tests
-jest.mock('../page.module.css', () => ({}));
-
 describe('Home Container', () => {
   it('should pass defaults as props', () => {
     const rendered = shallow(<HomeContainer />);
