@@ -35,17 +35,17 @@ const NftCalculator = (props: HomeProps) => {
   return (
     <div
       data-automation-id="home"
-      className="max-w-screen-lg my-10 mx-auto bg-slate-100 rounded-lg p-6"
+      className="max-w-screen-lg my-10 p-6 mx-auto bg-slate-800 rounded-xl shadow-lg ring-1 ring-white/10 ring-inset text-center"
     >
       <section data-automation-id="section-form">
         <header>
-          <h1 className="text-2xl mb-2 font-semibold">NFT Floor Sweep Estimator</h1>
-          <h2 className="mt-4 mb-6 font-medium">What NFT project do you want to buy?</h2>
+          <h1 className="mb-2 text-2xl font-semibold tracking-tight text-white">NFT Floor Sweep Estimator</h1>
+          <h2 className="mt-2 mb-4 text-lg text-slate-400">What NFT project do you want to buy?</h2>
         </header>
         <form data-automation-id="form-nft-projects" className="space-y-4" onSubmit={onFormSubmit}>
           <section data-automation-id="section-content">
             <div data-automation-id="fieldset-projects" className="mb-4">
-              <label htmlFor="projects" className="block mb-2">
+              <label htmlFor="projects" className="block mb-2 text-slate-400">
                 Choose project:
               </label>
               <ProjectSelect
@@ -56,7 +56,7 @@ const NftCalculator = (props: HomeProps) => {
               {errors.project && <FormError />}
             </div>
             <div data-automation-id="fieldset-quantity" className="mb-4">
-              <label htmlFor="quantity" className="block mb-2">
+              <label htmlFor="quantity" className="block mb-2 text-slate-400">
                 How many items you want to buy?
               </label>
               <input
@@ -77,7 +77,8 @@ const NftCalculator = (props: HomeProps) => {
                   'w-full',
                   'rounded-lg',
                   'h-12',
-                  { 'border-red-300': errors.quantity }
+                  'w-80',
+                  { 'border-4 border-red-300': errors.quantity }
                 )}
               />
               {errors.quantity && <FormError />}
@@ -87,13 +88,13 @@ const NftCalculator = (props: HomeProps) => {
             <button
               data-automation-id="button-submit"
               type="submit"
-              className="border border-green-300 bg-green-300 pl-2 pr-2 py-1 rounded font-medium"
+              className="border border-indigo-500 bg-indigo-500 text-white px-6 py-3 rounded font-medium"
             >
               Submit
             </button>
             <button
               data-automation-id="button-reset"
-              className="border border-red-300 bg-red-300 pl-2 pr-2 py-1 rounded font-medium ml-4"
+              className="border border-red-500 bg-red-500 text-white px-6 py-3 rounded font-medium ml-4"
               onClick={onResetClick}
             >
               Reset
@@ -103,7 +104,7 @@ const NftCalculator = (props: HomeProps) => {
       </section>
       {result && project && (
         <section data-automation-id="section-result" className="mt-6">
-          <h3 className="font-semibold mb-2 text-2xl">Calculation result</h3>
+          <h3 className="mb-2 text-2xl font-semibold tracking-tight text-white">Calculation result</h3>
           <Image
             src={project.logo}
             alt={project.name}
@@ -111,9 +112,9 @@ const NftCalculator = (props: HomeProps) => {
             height={128}
             className="rounded-xl z-10"
           />
-          <p data-automation-id="result-content">
-            To buy {quantity} NFTs from the <b>{project.name}</b> collection you will need at least{' '}
-            {result} ETH <Image src="/eth.png" alt="ETH Logo" width={18} height={18} />
+          <p data-automation-id="result-content" className="mt-2 mb-4 text-lg text-slate-400">
+            To buy {quantity} NFTs from the <b className="text-indigo-500">{project.name}</b> collection you will need at least{' '}
+            <b className="text-indigo-500">{result} ETH </b><Image src="/eth.png" alt="ETH Logo" width={18} height={18} />
           </p>
         </section>
       )}

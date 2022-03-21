@@ -1,5 +1,4 @@
 import { FormEvent, ChangeEvent } from 'react';
-import classNames from 'classnames';
 
 import { NftItem } from 'types/NftItem';
 import Loading from './../Loading/Loading';
@@ -18,21 +17,19 @@ interface NftListProps {
 const NftList = (props: NftListProps) => {
   const { isLoading, errors, nfts, collection, onCollectionChange, onFormSubmit } = props;
 
-  const classes = classNames('text-center', {
-    flex: nfts.length === 4,
-  });
-
   return (
     <div
       data-automation-id="home"
-      className="max-w-screen-lg my-10 mx-auto p-6 bg-slate-800 rounded-xl shadow-lg ring-1 ring-white/10 ring-inset text-center"
+      className="max-w-screen-lg mt-10 mb-20 mx-auto p-6 bg-slate-800 rounded-xl shadow-lg ring-1 ring-white/10 ring-inset text-center"
     >
-      <h2 className="mb-2 text-2xl font-semibold tracking-tight text-white">
-        My NFT List UI component
-      </h2>
-      <p className="mt-2 mb-4 text-lg text-slate-400">
-        List the top 4 cheapest NFT from a collection you like!
-      </p>
+      <section>
+        <h2 className="mb-2 text-2xl font-semibold tracking-tight text-white">
+          My NFT List UI component
+        </h2>
+        <p className="mt-2 mb-4 text-lg text-slate-400">
+          List the top 4 cheapest NFT from a collection you like!
+        </p>
+      </section>
       <form onSubmit={onFormSubmit}>
         <label htmlFor="collection" className="hidden mb-2 text-slate-200">
           Collection name
@@ -58,7 +55,7 @@ const NftList = (props: NftListProps) => {
       {isLoading && <Loading />}
 
       {!isLoading && (
-        <div className={classes}>
+        <div className="flex flex-col md:flex-row">
           {nfts.map((nft, index) => (
             <Nft key={nft.id} nft={nft} index={index} />
           ))}
