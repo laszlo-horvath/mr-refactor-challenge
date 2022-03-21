@@ -20,9 +20,12 @@ const ProjectSelect = (props: ProjectSelectProps) => {
     return <div data-automation-id="loading">Loading...</div>;
   }
 
-  const listboxButtonClasses = classNames('relative w-full h-12 py-2 pl-3 pr-10 text-left rounded-lg bg-white border border-gray-200 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm', {
-    'border-red-300': !isValid
-  });
+  const listboxButtonClasses = classNames(
+    'relative w-full h-12 py-2 pl-3 pr-10 text-left rounded-lg bg-white border border-gray-200 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm',
+    {
+      'border-red-300': !isValid,
+    }
+  );
 
   return (
     <Listbox data-automation-id="listbox" value={project} onChange={onListboxChange}>
@@ -65,7 +68,11 @@ const ProjectSelect = (props: ProjectSelectProps) => {
                       className="rounded-xl"
                     />
                     {!selected && <div className="pl-2">{project.name}</div>}
-                    {selected && <div className="pl-2"><b>{project.name}</b></div>}
+                    {selected && (
+                      <div className="pl-2">
+                        <b>{project.name}</b>
+                      </div>
+                    )}
                   </div>
                 )}
               </Listbox.Option>
