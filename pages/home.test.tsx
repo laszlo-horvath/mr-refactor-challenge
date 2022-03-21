@@ -31,10 +31,11 @@ describe('Home', () => {
   it('should render properly based on props', () => {
     let rendered = shallow(<Home {...props} />);
 
-    let inputField = rendered.find('input[type="number"]');
+    let inputField = rendered.find('[data-automation-id="field-quantity"]');
     expect(inputField.prop('value')).toBe(3);
 
-    const result = rendered.find('h3 + Image + div');
+    const resultSection = rendered.find('[data-automation-id="section-result"]')
+    const result = resultSection.find('[data-automation-id="result-content"]');
     const resultText = result.text();
     expect(resultText).toContain(props.quantity.toString());
     expect(resultText).toContain(mockProject.name);
@@ -48,15 +49,15 @@ describe('Home', () => {
     projectSelect.simulate('change', mockProject);
     expect(props.onProjectSelectChange).toHaveBeenCalledTimes(1);
 
-    let inputField = rendered.find('input[type="number"]');
+    let inputField = rendered.find('[data-automation-id="field-quantity"]');
     inputField.simulate('change');
     expect(props.onQuantityChange).toBeCalledTimes(1);
 
-    const form = rendered.find('form');
+    const form = rendered.find('[data-automation-id="form-nft-projects"]');
     form.simulate('submit');
     expect(props.onFormSubmit).toBeCalledTimes(1);
 
-    const resetButton = rendered.find('button + button');
+    const resetButton = rendered.find('[data-automation-id="button-reset"]');
     expect(resetButton.text().toLowerCase()).toBe('reset');
     resetButton.simulate('click');
     expect(props.onResetClick).toBeCalledTimes(1);
@@ -75,10 +76,10 @@ describe('Home', () => {
     let projects = rendered.find('Projects');
     expect(projects.prop('isValid')).toBe(false);
 
-    let projectErrorMessage = rendered.find('Projects + p');
+    let projectErrorMessage = rendered.find('Projects + [data-automation-id="form-error-message"]');
     expect(projectErrorMessage.text()).toContain('field is required');
 
-    let quantityErrorMessage = rendered.find('input[type="number"] + p');
+    let quantityErrorMessage = rendered.find('[data-automation-id="field-quantity"] + [data-automation-id="form-error-message"]');
     expect(quantityErrorMessage.text()).toContain('field is required');
   });
 });

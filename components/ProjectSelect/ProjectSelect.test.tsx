@@ -35,7 +35,7 @@ describe('Project Select', () => {
 
     const rendered = shallow(<ProjectSelect {...props} />);
 
-    const divs = rendered.find('div');
+    const divs = rendered.find('[data-automation-id="loading"]');
     expect(divs).toHaveLength(1);
     expect(divs.at(0).text().toLowerCase()).toContain('loading');
   });
@@ -51,7 +51,7 @@ describe('Project Select', () => {
 
     const rendered = mount(<ProjectSelect {...props} />);
 
-    const listbox = rendered.find('Listbox Button div');
+    const listbox = rendered.find('[data-automation-id="dropdown-default"]');
     expect(listbox.text().toLowerCase()).toContain('select one');
   });
 
@@ -66,10 +66,10 @@ describe('Project Select', () => {
 
     let rendered = mount(<ProjectSelect {...props} />);
 
-    const listbox = rendered.find('Listbox Button');
+    const listbox = rendered.find('Listbox[data-automation-id="listbox"] Button');
     listbox.simulate('click');
 
-    const options = rendered.find('Options Option');
+    const options = rendered.find('Listbox[data-automation-id="listbox"] Options Option');
     expect(options).toHaveLength(3);
 
     expect(options.at(0).find('default').prop('src')).toBe(mockProjects[0].logo);
@@ -78,7 +78,7 @@ describe('Project Select', () => {
     expect(options.at(2).find('default').prop('src')).toBe(mockProjects[2].logo);
     expect(options.at(2).find('default + div').text()).toBe(mockProjects[2].name);
 
-    const nftDispalyed = rendered.find('Listbox Button');
+    const nftDispalyed = rendered.find('Listbox[data-automation-id="listbox"] Button');
     expect(nftDispalyed.find('default').prop('src')).toBe(mockProjects[1].logo);
     expect(nftDispalyed.find('default + label').text()).toContain(mockProjects[1].name);
   });
@@ -94,7 +94,7 @@ describe('Project Select', () => {
 
     let rendered = shallow(<ProjectSelect {...props} />);
 
-    const listbox = rendered.find('Listbox');
+    const listbox = rendered.find('Listbox[data-automation-id="listbox"]');
     listbox.simulate('change', mockProjects[1]);
     expect(props.onListboxChange).toHaveBeenCalledTimes(1);
   });
@@ -110,7 +110,7 @@ describe('Project Select', () => {
 
     let rendered = mount(<ProjectSelect {...props} />);
 
-    const listboxButton = rendered.find('Listbox Button');
+    const listboxButton = rendered.find('Listbox[data-automation-id="listbox"] Button');
     expect(listboxButton.hasClass('border-red-300')).toBe(true);
   });
 });

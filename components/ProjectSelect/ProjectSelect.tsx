@@ -17,7 +17,7 @@ const ProjectSelect = (props: ProjectSelectProps) => {
   const { isLoading, project, projects, isValid, onListboxChange } = props;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div data-automation-id="loading">Loading...</div>;
   }
 
   const listboxButtonClasses = classNames('relative w-full h-12 py-2 pl-3 pr-10 text-left rounded-lg bg-white border border-gray-200 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm', {
@@ -25,11 +25,11 @@ const ProjectSelect = (props: ProjectSelectProps) => {
   });
 
   return (
-    <Listbox value={project} onChange={onListboxChange}>
+    <Listbox data-automation-id="listbox" value={project} onChange={onListboxChange}>
       {({ open }) => (
         <div className="relative mt-1 w-full z-20">
           <Listbox.Button className={listboxButtonClasses}>
-            {!project && <div>Select one...</div>}
+            {!project && <div data-automation-id="dropdown-default">Select one...</div>}
             {project && (
               <div className="flex">
                 <Image
