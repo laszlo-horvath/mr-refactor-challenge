@@ -1,4 +1,4 @@
-import { Listbox } from '@headlessui/react';
+import { Listbox, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
@@ -50,34 +50,43 @@ const ProjectSelect = (props: ProjectSelectProps) => {
               {open && ChevronUp}
             </span>
           </Listbox.Button>
-          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-75 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {projects.map((project, index) => (
-              <Listbox.Option
-                key={index}
-                value={project}
-                className="py-1 cursor-pointer hover:text-white hover:bg-indigo-500 transition-colors"
-              >
-                {({ selected }) => (
-                  <div className={classNames('py-1', 'px-2', 'flex', { 'pl-7': !selected })}>
-                    {selected && <CheckIcon />}
-                    <Image
-                      src={project.logo}
-                      alt={project.name}
-                      width={20}
-                      height={20}
-                      className="rounded-xl"
-                    />
-                    {!selected && <div className="pl-2">{project.name}</div>}
-                    {selected && (
-                      <div className="pl-2">
-                        <b>{project.name}</b>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
+          <Transition
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 transform -translate-y-6"
+            enterTo="opacity-100 transform translate-y-0"
+            leave="transition ease-in duration-200"
+            leaveFrom="opacity-100 transform translate-y-0"
+            leaveTo="opacity-0 transform -translate-y-6"
+          >
+            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-75 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {projects.map((project, index) => (
+                <Listbox.Option
+                  key={index}
+                  value={project}
+                  className="py-1 cursor-pointer hover:text-white hover:bg-indigo-500 transition-colors "
+                >
+                  {({ selected }) => (
+                    <div className={classNames('py-1', 'px-2', 'flex', { 'pl-7': !selected })}>
+                      {selected && <CheckIcon />}
+                      <Image
+                        src={project.logo}
+                        alt={project.name}
+                        width={20}
+                        height={20}
+                        className="rounded-xl"
+                      />
+                      {!selected && <div className="pl-2">{project.name}</div>}
+                      {selected && (
+                        <div className="pl-2">
+                          <b>{project.name}</b>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
         </div>
       )}
     </Listbox>
