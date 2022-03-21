@@ -3,7 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 
 import Project from 'types/Project';
-import { CheckIcon, ChevronDown, ChevronUp } from './icons/svg';
+import { CheckIcon, ChevronDown, ChevronUp } from './../icons/svg';
 
 interface ProjectSelectProps {
   isLoading: boolean;

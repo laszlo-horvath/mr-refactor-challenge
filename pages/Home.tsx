@@ -2,7 +2,7 @@ import { FormEvent, ChangeEvent, MouseEvent } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import ProjectSelect from '../components/ProjectSelectContainer';
+import ProjectSelect from '../components/ProjectSelect/ProjectSelectContainer';
 import Project from 'types/Project';
 
 import styles from '../page.module.css';
