@@ -34,10 +34,8 @@ describe('Project Select', () => {
     };
 
     const rendered = shallow(<ProjectSelect {...props} />);
-
-    const divs = rendered.find('[data-automation-id="loading"]');
-    expect(divs).toHaveLength(1);
-    expect(divs.at(0).text().toLowerCase()).toContain('loading');
+    const loading = rendered.find('Loading');
+    expect(loading).toBeDefined();
   });
 
   it('should render the empty dropdown', () => {

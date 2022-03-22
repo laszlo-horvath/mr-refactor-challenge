@@ -4,7 +4,7 @@ import NftList from './NftList';
 
 const NftListContainer = () => {
   const [collection, setCollection] = useState('');
-  const [cheapestNfts, setCheapestNfts] = useState(new Array());
+  const [cheapestNfts, setCheapestNfts] = useState<NftItem[]>(new Array());
   const [isLoading, setLoading] = useState(false);
   const [errors, setFormErrors] = useState({ collection: false });
 

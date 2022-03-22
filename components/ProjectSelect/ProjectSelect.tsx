@@ -22,7 +22,7 @@ const ProjectSelect = (props: ProjectSelectProps) => {
   }
 
   const listboxButtonClasses = classNames(
-    'relative w-full h-12 py-2 pl-3 pr-10 text-left rounded-lg bg-white border border-gray-200 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm',
+    'relative w-full h-16 sm:h-12 py-2 pl-3 pr-10 text-left rounded-lg bg-white border border-gray-200 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm',
     {
       'border-4 border-red-300': !isValid,
     }
@@ -31,7 +31,7 @@ const ProjectSelect = (props: ProjectSelectProps) => {
   return (
     <Listbox data-automation-id="listbox" value={project} onChange={onListboxChange}>
       {({ open }) => (
-        <div className="relative mt-1 mx-auto w-80 z-20">
+        <div className="relative mt-1 mx-auto sm:w-80 z-20">
           <Listbox.Button className={listboxButtonClasses}>
             {!project && <div data-automation-id="dropdown-default">Select one...</div>}
             {project && (
@@ -67,7 +67,7 @@ const ProjectSelect = (props: ProjectSelectProps) => {
                   className="py-1 cursor-pointer hover:text-white hover:bg-indigo-500 transition-colors "
                 >
                   {({ selected }) => (
-                    <div className={classNames('py-1', 'px-2', 'flex', { 'pl-7': !selected })}>
+                    <div className={classNames('py-1', 'px-2', 'flex', 'text-left', { 'pl-7': !selected })}>
                       {selected && <CheckIcon />}
                       <Image
                         src={project.logo}

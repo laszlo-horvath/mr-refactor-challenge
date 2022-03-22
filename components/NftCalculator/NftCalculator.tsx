@@ -74,10 +74,10 @@ const NftCalculator = (props: HomeProps) => {
                   'shadow-md',
                   'px-3',
                   'py-2',
-                  'w-full',
                   'rounded-lg',
                   'h-12',
-                  'w-80',
+                  'w-full',
+                  'sm:w-80',
                   { 'border-4 border-red-300': errors.quantity }
                 )}
               />

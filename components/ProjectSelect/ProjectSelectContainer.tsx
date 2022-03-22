@@ -12,13 +12,13 @@ interface ProjectsProps {
 export default function Projects(props: ProjectsProps) {
   const { project, onChange } = props;
 
-  const [projects, setProjects] = useState(new Array());
+  const [projects, setProjects] = useState<Project[]>(new Array());
   const [isLoading, setLoading] = useState(true);
 
   const fetchProjects = () => {
     fetch('/api/projects')
       .then(response => response.json())
-      .then(projects => {
+      .then((projects: Project[]) => {
         setProjects(projects);
         setLoading(false);
       })

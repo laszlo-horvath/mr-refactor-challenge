@@ -39,14 +39,14 @@ const NftList = (props: NftListProps) => {
           id="collection"
           name="collection"
           placeholder="Enter a collection name..."
-          className="border border-gray-200 shadow-md px-3 py-2 rounded h-12 w-80"
+          className="border border-gray-200 shadow-md px-3 py-2 rounded h-12 w-full sm:w-80"
           value={collection}
           onChange={onCollectionChange}
         />
         {errors.collection && <FormError />}
         <button
           type="submit"
-          className="mt-2 mb-6 mx-auto block w-80 border border-indigo-500 bg-indigo-500 px-6 py-3 rounded font-medium text-white"
+          className="mt-2 mb-6 mx-auto block w-full sm:w-80 border border-indigo-500 bg-indigo-500 px-6 py-3 rounded font-medium text-white"
         >
           Find NFTs
         </button>
