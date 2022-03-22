@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import Project from 'types/Project';
 import { CheckIcon, ChevronDown, ChevronUp } from './../icons/svg';
+import Loading from './../Loading/Loading';
 
 interface ProjectSelectProps {
   isLoading: boolean;
@@ -17,7 +18,7 @@ const ProjectSelect = (props: ProjectSelectProps) => {
   const { isLoading, project, projects, isValid, onListboxChange } = props;
 
   if (isLoading) {
-    return <div data-automation-id="loading">Loading...</div>;
+    return <Loading />;
   }
 
   const listboxButtonClasses = classNames(
